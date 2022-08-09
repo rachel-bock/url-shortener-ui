@@ -39,7 +39,4 @@ describe('Testing URL Shortener', () => {
     cy.get('button').click();
     cy.contains('Hello');
   });
-
-
-
 })
