@@ -10,7 +10,7 @@ describe('Testing URL Shortener', () => {
     cy.get('h1').contains('URL Shortener');
   });
 
-  it('Views the existing shortened URLs', () => {       //Cannot view the existing URLs from the fixture....
+  it('Views the existing shortened URLs', () => {       
     cy.get('section').should('have.length', 1);
     cy.get('.url').contains('Awesome');
   });
