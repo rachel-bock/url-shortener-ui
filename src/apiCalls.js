@@ -10,10 +10,10 @@ export const saveUrls = (myUrl) => {
     headers: {
       "Content-Type": "application/json"
     },
-    body: {
-      long_url: myUrl.urlToShorten,
-      title: myUrl.title
-    }
+    body: JSON.stringify({
+      "long_url": myUrl.urlToShorten,
+      "title": myUrl.title
+    })
   }
   return fetch('http://localhost:3001/api/v1/urls', options)
   .then(response => response.json())
