@@ -1,5 +1,33 @@
-describe('empty spec', () => {
-  it('passes', () => {
-    cy.visit('https://example.cypress.io')
+describe('Testing URL Shortener', () => {
+
+  beforeEach(() =>{
+    cy.intercept('http://localhost:3001/api/v1/urls', {fixture: 'urlsData.json'});
+    cy.visit('http://localhost:3000');
   })
+
+  it('Views page title', () => {
+    cy.get('h1').contains('URL Shortener');
+  });
+
+  it('Views the existing shortened URLs', () => {       //Cannot view the existing URLs from the fixture....
+    cy.get('section').should('have.length', 1);
+    // cy.get('.url').should('have.length', 2);
+    // cy.get('.url').contains('Awesome');
+  });
+
+  it('Shows the form with the proper input fields', () => {
+    cy.get('[placeholder="Title..."]').should('have.attr', 'name', 'title');
+    cy.get('[placeholder="URL to Shorten..."]').should('have.attr', 'name', 'urlToShorten');
+  });
+
+  it('Should reflect user input in form', () => {
+    cy.get('[placeholder="Title..."]')
+      .type('Hello')
+      .should('have.attr', 'value', 'Hello');
+    cy.get('[placeholder="URL to Shorten..."]')
+      .type('http://www.example.com')
+      .should('have.attr', 'value', 'http://www.example.com');
+  });
+
+  
 })
